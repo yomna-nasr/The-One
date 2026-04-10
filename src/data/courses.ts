@@ -13,7 +13,7 @@ export const courses: Course[] = [
     forWhom: 'Complete beginners or those looking for a solid foundation in Python and Computer Science logic.',
     links: {
       coursePage: 'https://ocw.mit.edu/courses/6-0001-introduction-to-computer-science-and-programming-in-python-fall-2016/',
-      playlist: 'https://www.youtube.com/playlist?list=PLUl4u3cNGP63WbdFLGuqbeafZi07YJi_Y'
+      playlist: 'https://www.youtube.com/playlist?list=PLUl4u3cNGP63WbdFxL8giv4yhgdMGaZNA'
     },
     editorialReview: 'This is the gold standard for starting your Computer Science journey. It doesn\'t just teach syntax; it teaches you how to think like a computer scientist.',
     studyGuide: 'Do all problem sets. Rewrite your solutions cleanly. Keep a log of your errors and how you fixed them.',
@@ -1663,5 +1663,369 @@ export const courses: Course[] = [
         suggestedTools: ['Python', 'PyTorch']
       }
     ]
+  },
+  {
+    id: '3b1b-linear-algebra',
+    title: 'Essence of Linear Algebra',
+    university: '3Blue1Brown',
+    topics: ['Mathematics'],
+    level: 'Intro',
+    format: 'Playlist',
+    certificate: 'None',
+    whyItsGreat: 'The most intuitive explanation of linear algebra ever created. It focuses on geometric intuition rather than just formulas.',
+    forWhom: 'Anyone who wants to truly understand what matrices and vectors are doing.',
+    links: {
+      coursePage: 'https://www.3blue1brown.com/topics/linear-algebra',
+      playlist: 'https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab'
+    },
+    editorialReview: 'Grant Sanderson has a gift for making abstract math feel physical. This series is essential for anyone entering Machine Learning.',
+    studyGuide: 'Watch these before or alongside a formal course like MIT 18.06. Try to visualize the transformations in your head.',
+    projects: [
+      {
+        id: 'linear-trans-viz',
+        title: 'Linear Transformation Visualizer',
+        domain: 'Mathematics',
+        skillTargets: ['Python', 'Matplotlib', 'Linear Algebra'],
+        steps: [
+          'Create a 2D grid of points',
+          'Apply a 2x2 matrix transformation to the grid',
+          'Animate the transition from the original grid to the transformed one',
+          'Add support for basis vector visualization'
+        ],
+        definitionOfDone: 'A Python script that produces a smooth animation of a linear transformation.',
+        suggestedTools: ['Python', 'Matplotlib', 'NumPy']
+      }
+    ]
+  },
+  {
+    id: '3b1b-calculus',
+    title: 'Essence of Calculus',
+    university: '3Blue1Brown',
+    topics: ['Mathematics'],
+    level: 'Intro',
+    format: 'Playlist',
+    certificate: 'None',
+    whyItsGreat: 'Makes the core concepts of calculus (derivatives, integrals, Taylor series) feel obvious and natural.',
+    forWhom: 'Students struggling with the "why" of calculus or those about to start a formal course.',
+    links: {
+      coursePage: 'https://www.3blue1brown.com/topics/calculus',
+      playlist: 'https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr'
+    },
+    editorialReview: 'Calculus is often taught as a set of rules to memorize. This series teaches it as a way of seeing change.',
+    studyGuide: 'Focus on the episode about the "Chain Rule" and "Taylor Series". They are the most impactful for ML.',
+    projects: [
+      {
+        id: 'derivative-explorer',
+        title: 'Interactive Derivative Explorer',
+        domain: 'Mathematics',
+        skillTargets: ['JavaScript', 'Canvas', 'Calculus'],
+        steps: [
+          'Plot a function (e.g., sin(x) or x^2)',
+          'Implement a draggable point on the curve',
+          'Calculate and draw the tangent line at that point',
+          'Show the numerical value of the slope in real-time'
+        ],
+        definitionOfDone: 'An interactive web page where users can explore derivatives visually.',
+        suggestedTools: ['JavaScript', 'p5.js']
+      }
+    ]
+  },
+  {
+    id: '3b1b-neural-networks',
+    title: 'Neural Networks',
+    university: '3Blue1Brown',
+    topics: ['Deep Learning', 'AI'],
+    level: 'Intro',
+    format: 'Playlist',
+    certificate: 'None',
+    whyItsGreat: 'The best visual introduction to how neural networks actually work, from neurons to backpropagation.',
+    forWhom: 'Beginners who want to understand the "black box" of AI.',
+    links: {
+      coursePage: 'https://www.3blue1brown.com/topics/neural-networks',
+      playlist: 'https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi'
+    },
+    editorialReview: 'If you only watch one thing to understand AI, make it this. It demystifies the math behind the hype.',
+    studyGuide: 'Pay close attention to the "Gradient Descent" and "Backpropagation" episodes. They are the engine of modern AI.',
+    projects: [
+      {
+        id: 'mnist-from-scratch-viz',
+        title: 'Visual MNIST from Scratch',
+        domain: 'Deep Learning',
+        skillTargets: ['Python', 'NumPy', 'Visualization'],
+        steps: [
+          'Implement a simple feedforward network using only NumPy',
+          'Train it on the MNIST dataset',
+          'Create a visualization that shows which pixels activate which neurons',
+          'Add a "drawing pad" where you can draw a digit and see the network predict it'
+        ],
+        definitionOfDone: 'A functional MNIST classifier with a visual representation of the hidden layers.',
+        suggestedTools: ['Python', 'NumPy', 'Matplotlib']
+      }
+    ]
+  },
+  {
+    id: '3b1b-diff-eq',
+    title: 'Differential Equations',
+    university: '3Blue1Brown',
+    topics: ['Mathematics'],
+    level: 'Intermediate',
+    format: 'Playlist',
+    certificate: 'None',
+    whyItsGreat: 'A beautiful exploration of how differential equations describe the world, from pendulums to heat flow.',
+    forWhom: 'Students who have finished calculus and want to see its most powerful applications.',
+    links: {
+      coursePage: 'https://www.3blue1brown.com/topics/differential-equations',
+      playlist: 'https://www.youtube.com/playlist?list=PLMrJAkhIeNNSVxmuq5Qz4n9QWGkSrT0fO'
+    },
+    editorialReview: 'Differential equations are the language of physics. Grant makes that language accessible and visual.',
+    studyGuide: 'The episode on "Fourier Series" is a masterpiece. It connects math, music, and heat transfer in one go.',
+    projects: [
+      {
+        id: 'pendulum-sim',
+        title: 'Double Pendulum Simulator',
+        domain: 'Mathematics',
+        skillTargets: ['Physics', 'Differential Equations', 'Simulation'],
+        steps: [
+          'Derive the equations of motion for a double pendulum',
+          'Implement a numerical solver (like Runge-Kutta)',
+          'Animate the pendulum\'s chaotic motion',
+          'Trace the path of the lower pendulum to show the fractal-like patterns'
+        ],
+        definitionOfDone: 'A smooth simulation of a double pendulum with path tracing.',
+        suggestedTools: ['Python', 'SciPy', 'Matplotlib']
+      }
+    ]
+  },
+  {
+    id: '3b1b-probability',
+    title: 'Probability',
+    university: '3Blue1Brown',
+    topics: ['Mathematics'],
+    level: 'Intro',
+    format: 'Playlist',
+    certificate: 'None',
+    whyItsGreat: 'Explores the counter-intuitive nature of probability with clear, visual logic.',
+    forWhom: 'Anyone who wants to improve their statistical intuition.',
+    links: {
+      coursePage: 'https://www.3blue1brown.com/topics/probability',
+      playlist: 'https://www.youtube.com/playlist?list=PLMrJAkhIeNNT_Xh3OyS2E9z1aNZU3H3aD'
+    },
+    editorialReview: 'Probability is notoriously difficult to get right. This series helps you build a solid mental model.',
+    studyGuide: 'The "Bayes Theorem" video is a must-watch for anyone interested in Data Science.',
+    projects: [
+      {
+        id: 'bayes-viz',
+        title: 'Bayes Theorem Visualizer',
+        domain: 'Mathematics',
+        skillTargets: ['Probability', 'Visualization', 'React'],
+        steps: [
+          'Create an interactive area-based representation of probability',
+          'Allow users to adjust prior probabilities and likelihoods',
+          'Show how the posterior probability updates in real-time',
+          'Include a "Medical Test" example to show common fallacies'
+        ],
+        definitionOfDone: 'An interactive web tool that makes Bayes Theorem intuitive through area-based visuals.',
+        suggestedTools: ['React', 'D3.js']
+      }
+    ]
+  },
+  {
+    id: '3b1b-quaternions',
+    title: 'Quaternions and 3D Rotation',
+    university: '3Blue1Brown',
+    topics: ['Mathematics', 'Computer Vision'],
+    level: 'Advanced',
+    format: 'Playlist',
+    certificate: 'None',
+    whyItsGreat: 'Demystifies one of the most confusing topics in 3D graphics and robotics.',
+    forWhom: 'Game developers, robotics engineers, and math enthusiasts.',
+    links: {
+      coursePage: 'https://www.3blue1brown.com/topics/quaternions',
+      playlist: 'https://www.youtube.com/playlist?list=PLp-ll7Dh7B8e9cE7qI8k5rWupj5jJ5-5m'
+    },
+    editorialReview: 'Quaternions are often treated as magic formulas. Grant shows them as a natural extension of complex numbers.',
+    studyGuide: 'Use the interactive "Quaternion Explorer" on the 3Blue1Brown website while watching.',
+    projects: [
+      {
+        id: 'quaternion-camera',
+        title: 'Quaternion-based Camera System',
+        domain: 'Computer Vision',
+        skillTargets: ['3D Graphics', 'Quaternions', 'Linear Algebra'],
+        steps: [
+          'Implement a 3D camera using Euler angles (and observe gimbal lock)',
+          'Rewrite the camera system using Quaternions',
+          'Implement smooth spherical linear interpolation (SLERP) between rotations',
+          'Demonstrate the lack of gimbal lock in the new system'
+        ],
+        definitionOfDone: 'A 3D scene where the camera rotates smoothly using quaternions without gimbal lock.',
+        suggestedTools: ['Three.js', 'JavaScript']
+      }
+    ]
+  },
+  {
+    id: '3b1b-old-linear-algebra',
+    title: 'Old Linear Algebra (2016)',
+    university: '3Blue1Brown',
+    topics: ['Mathematics'],
+    level: 'Intro',
+    format: 'Playlist',
+    certificate: 'None',
+    whyItsGreat: 'Grant\'s original take on linear algebra. While less polished than the "Essence" series, it contains unique insights and a different pace.',
+    forWhom: 'Students who want a second perspective on linear algebra concepts.',
+    links: {
+      playlist: 'https://www.youtube.com/playlist?list=PLZHQObOWTQDNYt7bPAvV3e2XdbmcH5g2g'
+    },
+    editorialReview: 'Even Grant\'s "old" work is better than most modern educational content. It\'s a great supplement to the main series.',
+    studyGuide: 'Use this if a specific concept in the "Essence" series didn\'t click. Sometimes a different explanation is all you need.',
+    projects: []
+  },
+  {
+    id: 'statquest-stats-fundamentals',
+    title: 'Statistics Fundamentals',
+    university: 'StatQuest',
+    topics: ['Mathematics', 'Data Science'],
+    level: 'Intro',
+    format: 'Playlist',
+    certificate: 'None',
+    whyItsGreat: 'Josh Starmer has a unique ability to explain p-values, hypothesis testing, and variance without the confusing jargon.',
+    forWhom: 'Anyone who finds traditional statistics textbooks intimidating.',
+    links: {
+      playlist: 'https://www.youtube.com/playlist?list=PLblh5JKOoLUK0FLuzwntyYI10UQW1Y9jk'
+    },
+    editorialReview: 'Triple Bam! This is the most accessible entry point into the world of statistics.',
+    studyGuide: 'Watch the "p-values" and "Hypothesis Testing" videos multiple times. They are the foundation of all scientific research.',
+    projects: [
+      {
+        id: 'hypothesis-tester',
+        title: 'A/B Test Calculator',
+        domain: 'Data Science',
+        skillTargets: ['Python', 'Statistics', 'Hypothesis Testing'],
+        steps: [
+          'Collect conversion data from two groups',
+          'Calculate the t-statistic and p-value',
+          'Determine if the results are statistically significant',
+          'Visualize the distributions of both groups'
+        ],
+        definitionOfDone: 'A tool that takes raw data and outputs a clear "Significant" or "Not Significant" result with a p-value.',
+        suggestedTools: ['Python', 'SciPy', 'Streamlit']
+      }
+    ]
+  },
+  {
+    id: 'statquest-ml-fundamentals',
+    title: 'Machine Learning Fundamentals',
+    university: 'StatQuest',
+    topics: ['Machine Learning', 'Data Science'],
+    level: 'Intro',
+    format: 'Playlist',
+    certificate: 'None',
+    whyItsGreat: 'Covers the essential "meta" concepts of ML like Bias/Variance, Cross-Validation, and ROC curves.',
+    forWhom: 'Beginners who want to understand how to evaluate and improve their models.',
+    links: {
+      playlist: 'https://www.youtube.com/playlist?list=PLblh5JKOoLUICTaGLRoHQDuF_7q2GfuJF'
+    },
+    editorialReview: 'Before you build a model, you need to know how to measure it. This series is the best guide for that.',
+    studyGuide: 'The video on "Bias and Variance" is a classic. It explains the core trade-off in all of machine learning.',
+    projects: []
+  },
+  {
+    id: 'statquest-linear-models',
+    title: 'Linear & Logistic Regression',
+    university: 'StatQuest',
+    topics: ['Machine Learning', 'Mathematics'],
+    level: 'Intro',
+    format: 'Playlist',
+    certificate: 'None',
+    whyItsGreat: 'Breaks down the most common predictive models into simple geometric and algebraic steps.',
+    forWhom: 'Students starting their journey into predictive modeling.',
+    links: {
+      playlist: 'https://www.youtube.com/playlist?list=PLblh5JKOoLUIzaIrbuotLluSMEK79f3K6'
+    },
+    editorialReview: 'Regression is the bread and butter of data science. Josh makes it feel like a walk in the park.',
+    studyGuide: 'Compare how Linear Regression handles continuous data vs how Logistic Regression handles classification.',
+    projects: []
+  },
+  {
+    id: 'statquest-trees-forests',
+    title: 'Decision Trees & Random Forests',
+    university: 'StatQuest',
+    topics: ['Machine Learning'],
+    level: 'Intermediate',
+    format: 'Playlist',
+    certificate: 'None',
+    whyItsGreat: 'Explains how simple decisions can scale into powerful ensemble models like Random Forests and XGBoost.',
+    forWhom: 'Learners ready to move beyond simple linear models.',
+    links: {
+      playlist: 'https://www.youtube.com/playlist?list=PLblh5JKOoLUIE96dI3U7oxHaC_2h2VmWp'
+    },
+    editorialReview: 'The visual explanation of how a Random Forest "votes" is simply the best in the business.',
+    studyGuide: 'Watch the XGBoost series carefully; it is the most popular algorithm for tabular data competitions.',
+    projects: [
+      {
+        id: 'titanic-forest',
+        title: 'Titanic Survival Predictor',
+        domain: 'Machine Learning',
+        skillTargets: ['Python', 'Scikit-learn', 'Random Forest'],
+        steps: [
+          'Clean the Titanic dataset (handle missing values)',
+          'Perform feature engineering on passenger titles',
+          'Train a Random Forest classifier',
+          'Evaluate using a confusion matrix and ROC curve'
+        ],
+        definitionOfDone: 'A model that predicts survival with >80% accuracy on the test set.',
+        suggestedTools: ['Python', 'Pandas', 'Scikit-learn']
+      }
+    ]
+  },
+  {
+    id: 'statquest-deep-learning',
+    title: 'Neural Networks & Transformers',
+    university: 'StatQuest',
+    topics: ['Deep Learning', 'AI'],
+    level: 'Intermediate',
+    format: 'Playlist',
+    certificate: 'None',
+    whyItsGreat: 'A step-by-step breakdown of Backpropagation, CNNs, and the Attention mechanism in Transformers.',
+    forWhom: 'Anyone curious about the inner workings of modern AI like GPT.',
+    links: {
+      playlist: 'https://www.youtube.com/playlist?list=PLblh5JKOoLUP2QfK9nEN69yZatV760Iq9'
+    },
+    editorialReview: 'Josh takes the "scary" out of deep learning. His explanation of Attention is particularly clear.',
+    studyGuide: 'The "Attention" video is critical for understanding how LLMs process language.',
+    projects: []
+  },
+  {
+    id: 'statquest-prob-dist',
+    title: 'Probability Distributions',
+    university: 'StatQuest',
+    topics: ['Mathematics', 'Data Science'],
+    level: 'Intro',
+    format: 'Playlist',
+    certificate: 'None',
+    whyItsGreat: 'Visualizes the Normal, Binomial, and Poisson distributions so you never forget how they work.',
+    forWhom: 'Anyone who needs to understand the shape of their data.',
+    links: {
+      playlist: 'https://www.youtube.com/playlist?list=PLblh5JKOoLUK7gB_T-V6f2L5XasHIdQ2F'
+    },
+    editorialReview: 'Distributions are the building blocks of statistics. Josh makes them intuitive.',
+    studyGuide: 'Focus on the "Normal Distribution" and "Central Limit Theorem" videos.',
+    projects: []
+  },
+  {
+    id: 'statquest-xgboost',
+    title: 'XGBoost In-Depth',
+    university: 'StatQuest',
+    topics: ['Machine Learning'],
+    level: 'Advanced',
+    format: 'Playlist',
+    certificate: 'None',
+    whyItsGreat: 'A deep dive into the math and logic of the world\'s most popular gradient boosting library.',
+    forWhom: 'Data scientists who want to master the details of XGBoost.',
+    links: {
+      playlist: 'https://www.youtube.com/playlist?list=PLblh5JKOoLULU0irPgs1AfzSrwnU6U9S8'
+    },
+    editorialReview: 'XGBoost is often used as a black box. Josh opens it up and shows you the gears.',
+    studyGuide: 'Watch the "Mathematical Details" video if you want to truly understand the objective function.',
+    projects: []
   }
 ];

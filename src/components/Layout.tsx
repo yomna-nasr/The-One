@@ -9,6 +9,7 @@ export function Masthead() {
     { name: 'Catalog', path: '/' },
     { name: 'Roadmaps', path: '/roadmaps' },
     { name: 'Projects', path: '/projects' },
+    { name: 'AI Path', path: '/ai-path' },
     { name: 'Universities', path: '/universities' },
   ];
 

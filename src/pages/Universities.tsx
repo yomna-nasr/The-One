@@ -92,6 +92,24 @@ const UNIVERSITIES: { name: University; description: string; links: { label: str
     links: [
       { label: 'Oxford CS', url: 'https://www.cs.ox.ac.uk/' }
     ]
+  },
+  {
+    name: '3Blue1Brown',
+    description: 'Created by Grant Sanderson, 3Blue1Brown is a YouTube channel that uses animation to make complex mathematical concepts intuitive and beautiful.',
+    links: [
+      { label: 'Official Website', url: 'https://www.3blue1brown.com/' },
+      { label: 'YouTube Channel', url: 'https://www.youtube.com/@3blue1brown' },
+      { label: 'Summer of Math Expo', url: 'https://www.youtube.com/playlist?list=PLZHQObOWTQDP5Cgj5pO2sYv5d6n8cjc2V' },
+      { label: 'Misc Math/Science', url: 'https://www.youtube.com/playlist?list=PLZHQObOWTQDOd2Gq7c-Ur2iir8bDjx3tS' }
+    ]
+  },
+  {
+    name: 'StatQuest',
+    description: 'StatQuest with Josh Starmer breaks down complex Statistics and Machine Learning concepts into small, simple, and easy-to-understand pieces.',
+    links: [
+      { label: 'Official Website', url: 'https://statquest.org/' },
+      { label: 'YouTube Channel', url: 'https://www.youtube.com/@statquest' }
+    ]
   }
 ];
 

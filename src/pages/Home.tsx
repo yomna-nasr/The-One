@@ -4,7 +4,7 @@ import { CourseCard } from '../components/CourseCard';
 import { University, Topic, Level, Format, CertificateStatus } from '../types';
 import { Search, X } from 'lucide-react';
 
-const UNIVERSITIES: University[] = ['Stanford', 'Harvard', 'Michigan', 'MIT', 'Princeton', 'UC Berkeley', 'Columbia', 'Brown', 'Cornell', 'Georgia Tech', 'University of Washington', 'University of Oxford'];
+const UNIVERSITIES: University[] = ['Stanford', 'Harvard', 'Michigan', 'MIT', 'Princeton', 'UC Berkeley', 'Columbia', 'Brown', 'Cornell', 'Georgia Tech', 'University of Washington', 'University of Oxford', '3Blue1Brown', 'StatQuest'];
 const TOPICS: Topic[] = ['Computer Science', 'Mathematics', 'AI', 'Machine Learning', 'Deep Learning', 'Data Science', 'Data Analysis', 'NLP', 'Computer Vision'];
 
 export default function Home() {

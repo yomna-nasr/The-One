@@ -10,7 +10,9 @@ export type University =
   | 'Cornell'
   | 'Georgia Tech'
   | 'University of Washington'
-  | 'University of Oxford';
+  | 'University of Oxford'
+  | '3Blue1Brown'
+  | 'StatQuest';
 
 export type Topic = 
   | 'Computer Science' 
