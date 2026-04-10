@@ -65,6 +65,41 @@ export function Layout({ children }: { children: React.ReactNode }) {
             A magazine-style curator of the world's best free university lectures. 
             We list only verified best-of items; more are added weekly.
           </p>
+          <div className="mt-6 space-y-4">
+            <div className="space-y-1">
+              <p className="text-[10px] uppercase tracking-widest font-bold opacity-40">Curated by</p>
+              <p className="text-sm font-serif italic">Yomna Nasr</p>
+            </div>
+            
+            <div className="flex flex-wrap justify-center gap-x-6 gap-y-2">
+              <a 
+                href="mailto:goudamahmoud244@gmail.com" 
+                className="text-[10px] uppercase tracking-widest font-bold opacity-60 hover:opacity-100 transition-opacity underline decoration-ink/20 underline-offset-4"
+              >
+                Email
+              </a>
+              <a 
+                href="https://twitter.com/ygoud21" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[10px] uppercase tracking-widest font-bold opacity-60 hover:opacity-100 transition-opacity underline decoration-ink/20 underline-offset-4"
+              >
+                Twitter
+              </a>
+              <a 
+                href="https://threads.net/@nasrvault" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[10px] uppercase tracking-widest font-bold opacity-60 hover:opacity-100 transition-opacity underline decoration-ink/20 underline-offset-4"
+              >
+                Threads
+              </a>
+            </div>
+
+            <p className="text-[9px] uppercase tracking-[0.2em] font-bold opacity-30 pt-4">
+              Released under the MIT License
+            </p>
+          </div>
           <div className="mt-8 pt-8 border-t editorial-border flex justify-between items-center text-[10px] uppercase tracking-widest opacity-40">
             <span>© 2026 The One Editorial</span>
             <span>New York — London — Silicon Valley</span>
