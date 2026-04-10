@@ -17,7 +17,14 @@ export function Masthead() {
     <header className="border-b editorial-border bg-paper sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center py-6 space-y-4">
-          <Link to="/" className="text-center group">
+          <Link to="/" className="text-center group flex flex-col items-center">
+            <img 
+              src="/logo.png" 
+              alt="The One Logo" 
+              className="w-16 h-16 mb-2 object-contain hidden" 
+              onLoad={(e) => e.currentTarget.classList.remove('hidden')}
+              referrerPolicy="no-referrer"
+            />
             <h1 className="masthead-text text-5xl sm:text-7xl tracking-[-0.05em] leading-none group-hover:opacity-80 transition-opacity">
               The One
             </h1>
