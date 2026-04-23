@@ -21,6 +21,7 @@ export const roadmaps: Roadmap[] = [
       id: 'personal-knowledge-base',
       title: 'Personal Knowledge Base',
       domain: 'Systems',
+      level: 'Intro',
       skillTargets: ['Schema Design', 'Search', 'UI/UX', 'Deployment'],
       steps: [
         'Design the database schema',
@@ -29,7 +30,10 @@ export const roadmaps: Roadmap[] = [
         'Deploy the application'
       ],
       definitionOfDone: 'A deployed app with documentation.',
-      suggestedTools: ['React', 'Node.js', 'PostgreSQL']
+      suggestedTools: ['React', 'Node.js', 'PostgreSQL'],
+      role: 'Junior',
+      isMustOnCV: true,
+      possiblePositions: ['Fullstack Developer', 'Backend Engineer', 'Product Programmer']
     }
   },
   {
@@ -52,6 +56,7 @@ export const roadmaps: Roadmap[] = [
       id: 'from-scratch-pca',
       title: 'From-scratch PCA + Report',
       domain: 'Mathematics',
+      level: 'Intermediate',
       skillTargets: ['Linear Algebra', 'NumPy', 'Visualization'],
       steps: [
         'Implement PCA using SVD',
@@ -60,7 +65,10 @@ export const roadmaps: Roadmap[] = [
         'Write a detailed explanation of the math'
       ],
       definitionOfDone: 'PCA implementation + visualizations + explanation.',
-      suggestedTools: ['Python', 'NumPy', 'Matplotlib']
+      suggestedTools: ['Python', 'NumPy', 'Matplotlib'],
+      role: 'Senior',
+      isMustOnCV: true,
+      possiblePositions: ['Quant Analyst', 'Machine Learning Researcher', 'Data Scientist (Theory)']
     }
   },
   {
@@ -83,6 +91,7 @@ export const roadmaps: Roadmap[] = [
       id: 'model-debugging-report',
       title: 'Model Debugging Report',
       domain: 'Machine Learning',
+      level: 'Intermediate',
       skillTargets: ['Model Evaluation', 'Debugging', 'Error Analysis'],
       steps: [
         'Select a complex dataset',
@@ -91,7 +100,10 @@ export const roadmaps: Roadmap[] = [
         'Create a metric dashboard'
       ],
       definitionOfDone: 'Repo + metric dashboard + written error analysis.',
-      suggestedTools: ['Python', 'Scikit-Learn', 'MLflow']
+      suggestedTools: ['Python', 'Scikit-Learn', 'MLflow'],
+      role: 'Senior',
+      isMustOnCV: false,
+      possiblePositions: ['Machine Learning Engineer', 'Data Scientist', 'Model Evaluator']
     }
   },
   {
@@ -114,6 +126,7 @@ export const roadmaps: Roadmap[] = [
       id: 'reproducible-training-pipeline',
       title: 'Reproducible Training Pipeline',
       domain: 'Deep Learning',
+      level: 'Advanced',
       skillTargets: ['PyTorch', 'Experiment Tracking', 'Software Engineering'],
       steps: [
         'Build a config-based training script',
@@ -122,7 +135,10 @@ export const roadmaps: Roadmap[] = [
         'Ensure reproducibility across runs'
       ],
       definitionOfDone: 'Config-based training + saved checkpoints + evaluation script.',
-      suggestedTools: ['PyTorch', 'WandB', 'Hydra']
+      suggestedTools: ['PyTorch', 'WandB', 'Hydra'],
+      role: 'Manager',
+      isMustOnCV: true,
+      possiblePositions: ['DL Systems Architect', 'Senior ML Engineer', 'MLOps Engineer']
     }
   },
   {
@@ -145,6 +161,7 @@ export const roadmaps: Roadmap[] = [
       id: 'text-classifier-interpretation',
       title: 'Text Classifier + Interpretation',
       domain: 'NLP',
+      level: 'Advanced',
       skillTargets: ['NLP', 'Transformers', 'Model Interpretability'],
       steps: [
         'Train a text classifier',
@@ -153,7 +170,10 @@ export const roadmaps: Roadmap[] = [
         'Explain failure cases'
       ],
       definitionOfDone: 'Classifier + confusion analysis + explanation of failure cases.',
-      suggestedTools: ['Python', 'Hugging Face', 'SHAP']
+      suggestedTools: ['Python', 'Hugging Face', 'SHAP'],
+      role: 'Manager',
+      isMustOnCV: true,
+      possiblePositions: ['NLP Engineer', 'Senior AI Researcher', 'Language Systems Engineer']
     }
   },
   {
@@ -176,6 +196,7 @@ export const roadmaps: Roadmap[] = [
       id: 'object-recognition-system',
       title: 'Object Recognition Mini-System',
       domain: 'Computer Vision',
+      level: 'Advanced',
       skillTargets: ['CV', 'Object Detection', 'Real-time Processing'],
       steps: [
         'Build a dataset loader',
@@ -184,7 +205,10 @@ export const roadmaps: Roadmap[] = [
         'Create a live demo'
       ],
       definitionOfDone: 'Dataset loader + model + evaluation + demo.',
-      suggestedTools: ['Python', 'OpenCV', 'PyTorch']
+      suggestedTools: ['Python', 'OpenCV', 'PyTorch'],
+      role: 'Manager',
+      isMustOnCV: true,
+      possiblePositions: ['Computer Vision Architect', 'Automation Engineer', 'Robotics Systems Developer']
     }
   },
   {
@@ -207,6 +231,7 @@ export const roadmaps: Roadmap[] = [
       id: 'market-analysis-engine',
       title: 'End-to-End Market Analysis Engine',
       domain: 'Data Analysis',
+      level: 'Advanced',
       skillTargets: ['Data Scraping', 'Statistical Analysis', 'Interactive Dashboards'],
       steps: [
         'Scrape and clean real-world market data',
@@ -215,7 +240,10 @@ export const roadmaps: Roadmap[] = [
         'Deploy the engine as a web application'
       ],
       definitionOfDone: 'A deployed dashboard with a comprehensive analysis report.',
-      suggestedTools: ['Python', 'Pandas', 'BeautifulSoup', 'Streamlit']
+      suggestedTools: ['Python', 'Pandas', 'BeautifulSoup', 'Streamlit'],
+      role: 'Junior',
+      isMustOnCV: true,
+      possiblePositions: ['Lead Data Analyst', 'BI Specialist', 'Market Strategy Analyst']
     }
   }
 ];

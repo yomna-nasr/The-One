@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { GoogleGenAI, Type } from "@google/genai";
 import { courses } from '../data/courses';
 import { roadmaps } from '../data/roadmaps';
@@ -22,6 +23,7 @@ interface GeneratedPath {
 }
 
 export default function AIGenerator() {
+  const { t } = useTranslation();
   const [goal, setGoal] = useState('');
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<GeneratedPath | null>(null);
@@ -121,27 +123,26 @@ export default function AIGenerator() {
       <section className="text-center space-y-6">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ink/5 text-ink/60 text-[10px] uppercase tracking-widest font-bold">
           <Sparkles className="w-3 h-3" />
-          AI-Powered Guidance
+          {t('ai.label')}
         </div>
-        <h2 className="text-4xl md:text-6xl font-serif font-bold italic">
-          Your Custom Path to Mastery
+        <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif font-bold italic px-4">
+          {t('ai.title')}
         </h2>
         <p className="text-lg text-ink/60 leading-relaxed font-serif max-w-2xl mx-auto">
-          Tell us your ambition. Our AI will synthesize a unique curriculum 
-          using the world's highest-signal educational resources.
+          {t('ai.subtitle')}
         </p>
       </section>
 
-      <div className="border editorial-border p-8 bg-paper/50 backdrop-blur-sm">
+      <div className="border editorial-border p-6 sm:p-8 bg-paper/50 backdrop-blur-sm -mx-4 sm:mx-0">
         <div className="space-y-4">
-          <label className="micro-label opacity-40">What is your learning goal?</label>
+          <label className="micro-label opacity-40">{t('ai.placeholder')}</label>
           <div className="flex flex-col md:flex-row gap-4">
             <input
               type="text"
               value={goal}
               onChange={(e) => setGoal(e.target.value)}
-              placeholder="e.g., I want to build a self-driving car agent from scratch"
-              className="flex-grow bg-transparent border editorial-border px-4 py-3 text-sm focus:outline-none focus:ring-1 focus:ring-ink/20"
+              placeholder={t('ai.placeholder')}
+              className="flex-grow bg-transparent border editorial-border px-4 py-3 text-sm focus:outline-none focus:ring-1 focus:ring-ink/20 font-serif italic"
               onKeyDown={(e) => e.key === 'Enter' && generatePath()}
             />
             <button
@@ -152,18 +153,18 @@ export default function AIGenerator() {
               {loading ? (
                 <>
                   <Loader2 className="w-4 h-4 animate-spin" />
-                  Synthesizing...
+                  {t('ai.synthesizing')}
                 </>
               ) : (
                 <>
-                  Generate Path
+                  {t('ai.generate')}
                   <ArrowRight className="w-4 h-4" />
                 </>
               )}
             </button>
           </div>
           <p className="text-[10px] text-ink/40 italic">
-            Note: This feature is powered by Gemini 3 Flash and is free to use.
+            {t('ai.note')}
           </p>
         </div>
       </div>
@@ -189,7 +190,7 @@ export default function AIGenerator() {
             <div className="border-l-4 border-ink pl-8 space-y-4">
               <h3 className="text-3xl font-serif font-bold">{result.title}</h3>
               <p className="text-ink/60 font-serif leading-relaxed">{result.description}</p>
-              <div className="flex items-center gap-6 text-[10px] uppercase tracking-widest font-bold opacity-60">
+            <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 text-[10px] uppercase tracking-widest font-bold opacity-60">
                 <span className="flex items-center gap-2">
                   <Clock className="w-3 h-3" />
                   {result.estimatedTime}
@@ -249,24 +250,24 @@ export default function AIGenerator() {
       {!result && !loading && (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-12">
           <div className="p-6 border editorial-border space-y-4 opacity-60">
-            <BrainCircuit className="w-6 h-6" />
-            <h4 className="font-serif font-bold">Deep Context</h4>
-            <p className="text-xs text-ink/60 leading-relaxed">
-              Our AI understands the specific nuances of every course in our catalog.
+            <BrainCircuit className="w-6 h-6 text-ink/20" />
+            <h4 className="font-serif font-bold">{t('ai.context')}</h4>
+            <p className="text-xs text-ink/60 leading-relaxed italic">
+              {t('ai.contextDesc')}
             </p>
           </div>
           <div className="p-6 border editorial-border space-y-4 opacity-60">
-            <Target className="w-6 h-6" />
-            <h4 className="font-serif font-bold">Goal Oriented</h4>
-            <p className="text-xs text-ink/60 leading-relaxed">
-              Whether it's a career pivot or a specific project, the path is tailored to you.
+            <Target className="w-6 h-6 text-ink/20" />
+            <h4 className="font-serif font-bold">{t('ai.goal')}</h4>
+            <p className="text-xs text-ink/60 leading-relaxed italic">
+              {t('ai.goalDesc')}
             </p>
           </div>
           <div className="p-6 border editorial-border space-y-4 opacity-60">
-            <Clock className="w-6 h-6" />
-            <h4 className="font-serif font-bold">Efficient Learning</h4>
-            <p className="text-xs text-ink/60 leading-relaxed">
-              We eliminate the noise and focus only on the canonical best resources.
+            <Clock className="w-6 h-6 text-ink/20" />
+            <h4 className="font-serif font-bold">{t('ai.efficiency')}</h4>
+            <p className="text-xs text-ink/60 leading-relaxed italic">
+              {t('ai.efficiencyDesc')}
             </p>
           </div>
         </div>

@@ -32,4 +32,12 @@
   .micro-label {
     @apply text-[10px] uppercase tracking-[0.2em] font-semibold opacity-60;
   }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }

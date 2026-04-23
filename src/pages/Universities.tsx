@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { University } from '../types';
 import { courses } from '../data/courses';
 import { ExternalLink, ArrowRight } from 'lucide-react';
@@ -114,20 +115,20 @@ const UNIVERSITIES: { name: University; description: string; links: { label: str
 ];
 
 export default function Universities() {
+  const { t } = useTranslation();
   return (
     <div className="space-y-16">
       <section className="text-center max-w-3xl mx-auto">
-        <span className="micro-label mb-4 block">Institutional Hubs</span>
-        <h2 className="text-4xl md:text-6xl font-serif font-bold mb-6 italic">
-          The Universities
+        <span className="micro-label mb-4 block">{t('universities.label')}</span>
+        <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif font-bold mb-6 italic px-4">
+          {t('universities.title')}
         </h2>
         <p className="text-lg text-ink/60 leading-relaxed font-serif">
-          We curate from the world's most prestigious institutions. 
-          Each hub contains verified links to official departments and playlists.
+          {t('universities.subtitle')}
         </p>
       </section>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 px-4 sm:px-0">
         {UNIVERSITIES.map((uni) => {
           const uniCourses = courses.filter(c => c.university === uni.name);
           
@@ -140,7 +141,7 @@ export default function Universities() {
               
               <div className="space-y-6">
                 <div>
-                  <h4 className="micro-label mb-3 opacity-40">Featured Resources ({uniCourses.length})</h4>
+                  <h4 className="micro-label mb-3 opacity-40">{t('universities.featured')} ({uniCourses.length})</h4>
                   <div className="space-y-2">
                     {uniCourses.length > 0 ? (
                       uniCourses.map(course => (
@@ -159,7 +160,7 @@ export default function Universities() {
                 </div>
 
                 <div className="pt-6 border-t editorial-border">
-                  <h4 className="micro-label mb-3 opacity-40">Official Links</h4>
+                  <h4 className="micro-label mb-3 opacity-40">{t('universities.official')}</h4>
                   <div className="flex flex-wrap gap-4">
                     {uni.links.map(link => (
                       <a 

@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Course } from '../types';
 import { ExternalLink, ArrowRight } from 'lucide-react';
 
 export const CourseCard: React.FC<{ course: Course }> = ({ course }) => {
+  const { t } = useTranslation();
   return (
     <article className="group border-b editorial-border pb-12 mb-12 last:border-0">
       <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
@@ -32,14 +34,14 @@ export const CourseCard: React.FC<{ course: Course }> = ({ course }) => {
               {course.format}
             </span>
             <span className="px-2 py-1 bg-ink/5 text-[10px] uppercase tracking-wider font-semibold">
-              Cert: {course.certificate}
+              {t('common.certificate')}: {course.certificate}
             </span>
           </div>
         </div>
         
-        <div className="md:col-span-4 flex flex-col justify-between border-l editorial-border pl-8">
+        <div className="md:col-span-4 flex flex-col justify-between border-t md:border-t-0 md:border-l editorial-border pt-8 md:pt-0 md:pl-8">
           <div>
-            <h4 className="micro-label mb-3">For Whom</h4>
+            <h4 className="micro-label mb-3">{t('common.forWhom')}</h4>
             <p className="text-sm text-ink/60 leading-relaxed mb-6">
               {course.forWhom}
             </p>

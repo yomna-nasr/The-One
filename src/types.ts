@@ -15,6 +15,7 @@ export type University =
   | 'StatQuest';
 
 export type Topic = 
+  | 'Systems'
   | 'Computer Science' 
   | 'Mathematics' 
   | 'AI' 
@@ -27,6 +28,8 @@ export type Topic =
 
 export type Level = 'Intro' | 'Intermediate' | 'Advanced';
 
+export type ProjectRole = 'Junior' | 'Senior' | 'Manager';
+
 export type Format = 'Full Course' | 'Playlist' | 'Seminar' | 'Workshop';
 
 export type CertificateStatus = 'Free' | 'Paid' | 'None' | 'Unknown';
@@ -34,11 +37,15 @@ export type CertificateStatus = 'Free' | 'Paid' | 'None' | 'Unknown';
 export interface Project {
   id: string;
   title: string;
-  domain: Topic | 'Systems';
+  domain: Topic;
+  level: Level;
   skillTargets: string[];
   steps: string[];
   definitionOfDone: string;
   suggestedTools: string[];
+  role: ProjectRole;
+  isMustOnCV: boolean;
+  possiblePositions: string[];
 }
 
 export interface Course {
