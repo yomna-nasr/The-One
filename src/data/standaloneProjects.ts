@@ -53,6 +53,24 @@ export const standaloneProjects: Project[] = [
     isMustOnCV: false,
     possiblePositions: ['Junior Data Analyst', 'Reporter', 'Operations Analyst']
   },
+  {
+    id: 'standalone-data-quality-audit',
+    title: 'Data Cleaning & Quality Audit',
+    domain: 'Data Science',
+    level: 'Intro',
+    skillTargets: ['Data Profiling', 'Reproducible Research', 'Automation'],
+    steps: [
+      'Identify missing values and detect duplicates in a messy dataset',
+      'Implement outlier detection using statistical methods (Z-score, IQR)',
+      'Validate complex business rules across related fields',
+      'Generate a "Before & After" data quality report with metrics'
+    ],
+    definitionOfDone: 'A reproducible cleaning pipeline and a comprehensive audit report.',
+    suggestedTools: ['Python', 'Pandas', 'Great Expectations', 'Dedupe.io'],
+    role: 'Junior',
+    isMustOnCV: true,
+    possiblePositions: ['Data Quality Analyst', 'Junior Data Engineer', 'Associate Data Scientist']
+  },
 
   // Intermediate Level
   {
@@ -282,6 +300,42 @@ export const standaloneProjects: Project[] = [
     possiblePositions: ['Product Growth Analyst', 'Experimentalist', 'Conversion Rate Optimizer']
   },
   {
+    id: 'standalone-cohort-retention',
+    title: 'Cohort Retention Analysis',
+    domain: 'Data Analysis',
+    level: 'Intermediate',
+    skillTargets: ['Python', 'SQL', 'Product Analytics', 'Visualization'],
+    steps: [
+      'Define user cohorts by signup month or acquisition channel',
+      'SQL: Aggregate user activity into a cohort matrix',
+      'Compute retention rates over time (Day/Month N retention)',
+      'Visualize results using a retention heatmap'
+    ],
+    definitionOfDone: 'A retention matrix, heatmap, and report with churn-reduction recommendations.',
+    suggestedTools: ['SQL (PostgreSQL)', 'Python', 'Seaborn', 'Pandas'],
+    role: 'Senior',
+    isMustOnCV: true,
+    possiblePositions: ['Product Analyst', 'Growth Data Scientist', 'Retention Specialist']
+  },
+  {
+    id: 'standalone-funnel-analysis',
+    title: 'Behavioral Funnel Analysis',
+    domain: 'Data Analysis',
+    level: 'Intermediate',
+    skillTargets: ['User Path Tracking', 'Conversion Rate Optimization', 'Segment Analysis'],
+    steps: [
+      'Map the user journey from visit to conversion',
+      'Calculate drop-off rates at each stage of the funnel',
+      'Perform segment analysis by device, country, and channel',
+      'Identify critical bottlenecks using friction analysis'
+    ],
+    definitionOfDone: 'A funnel visualization dashboard and a bottleneck identification report.',
+    suggestedTools: ['SQL Window Functions', 'Mixpanel/GA4 (concepts)', 'Plotly'],
+    role: 'Senior',
+    isMustOnCV: true,
+    possiblePositions: ['E-commerce Analyst', 'Market Growth Lead', 'Conversion Rate Analyst']
+  },
+  {
     id: 'standalone-nlp-scratch',
     title: 'NLP Pipeline From Scratch',
     domain: 'NLP',
@@ -340,7 +394,7 @@ export const standaloneProjects: Project[] = [
     skillTargets: ['OpenCV', 'Deployment', 'Inference'],
     steps: [
       'Build a Face Recognition or Mask Detection system',
-      'Integrate OpenCV for webcam stream processing',
+      'Integrate OpenCV for web cam stream processing',
       'Deploy the application for real-world usage'
     ],
     definitionOfDone: 'A desktop or web app that performs visually accurate real-time inference.',
@@ -441,6 +495,42 @@ export const standaloneProjects: Project[] = [
     role: 'Senior',
     isMustOnCV: true,
     possiblePositions: ['Compiler Engineer', 'Language Tools Developer', 'Senior Software Engineer']
+  },
+  {
+    id: 'standalone-revenue-kpi',
+    title: 'Executive Revenue & KPI Dashboard',
+    domain: 'Data Analysis',
+    level: 'Advanced',
+    skillTargets: ['Business KPIs', 'Executive Reporting', 'Financial Modeling'],
+    steps: [
+      'Calculate core metrics: Revenue Trends, ARPU, LTV, and Growth Rate (MoM/YoY)',
+      'Implement advanced SQL aggregations and time-based grouping',
+      'BONUS: Forecast future revenue utilizing simple regression models',
+      'Design an executive-style dashboard that communicates strategic value'
+    ],
+    definitionOfDone: 'A high-level business dashboard with predictive insights and clear KPI trends.',
+    suggestedTools: ['Tableau/PowerBI', 'SQL Aggregations', 'Python (Scikit-Learn)'],
+    role: 'Manager',
+    isMustOnCV: true,
+    possiblePositions: ['Business Intelligence Lead', 'Senior Revenue Operations Analyst', 'Strategic Data Consultant']
+  },
+  {
+    id: 'standalone-time-series-forecast',
+    title: 'Time Series Forecasting & Analysis',
+    domain: 'Data Science',
+    level: 'Advanced',
+    skillTargets: ['Time Series Modeling', 'Forecasting', 'Statistical Testing'],
+    steps: [
+      'Decompose series into trend, seasonality, and residual components',
+      'Conduct stationarity testing (ADF test) and rolling average analysis',
+      'Implement forecasting models using ARIMA, SARIMA, or Facebook Prophet',
+      'Verify performance using error metrics like MAE and RMSE'
+    ],
+    definitionOfDone: 'A validated forecasting engine with a detailed evaluation of various model performances.',
+    suggestedTools: ['Python', 'Statsmodels', 'Prophet', 'Matplotlib'],
+    role: 'Senior',
+    isMustOnCV: true,
+    possiblePositions: ['Forecasting Specialist', 'Demand Planner', 'Research Data Scientist']
   },
   {
     id: 'standalone-monte-carlo',
