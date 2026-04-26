@@ -27,6 +27,7 @@ export default function App() {
           <Route path="/projects" element={<Projects />} />
           <Route path="/universities" element={<Universities />} />
           <Route path="/ai-path" element={<AIGenerator />} />
+          <Route path="*" element={<Home />} />
         </Routes>
       </Layout>
     </Router>

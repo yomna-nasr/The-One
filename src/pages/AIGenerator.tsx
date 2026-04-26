@@ -8,7 +8,13 @@ import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 
 // Initialize Gemini
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+const getAI = () => {
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) {
+    throw new Error('GEMINI_API_KEY is not defined');
+  }
+  return new GoogleGenAI({ apiKey });
+};
 
 interface GeneratedPath {
   title: string;
@@ -78,7 +84,7 @@ export default function AIGenerator() {
         }
       `;
 
-      const response = await ai.models.generateContent({
+      const response = await getAI().models.generateContent({
         model: "gemini-3-flash-preview",
         contents: prompt,
         config: {
