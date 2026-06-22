@@ -3,17 +3,141 @@ import { useTranslation } from 'react-i18next';
 import { GoogleGenAI, Type } from "@google/genai";
 import { courses } from '../data/courses';
 import { roadmaps } from '../data/roadmaps';
-import { Sparkles, ArrowRight, Loader2, BrainCircuit, Target, Clock } from 'lucide-react';
+import { 
+  Sparkles, 
+  ArrowRight, 
+  Loader2, 
+  BrainCircuit, 
+  Target, 
+  Clock
+} from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 
-// Initialize Gemini
-const getAI = () => {
-  const apiKey = process.env.GEMINI_API_KEY;
-  if (!apiKey) {
-    throw new Error('GEMINI_API_KEY is not defined');
+// Generalized JSON cleaning and parsing helper
+const parseJSONString = (text: string) => {
+  let cleaned = text.trim();
+  if (cleaned.startsWith('```json')) {
+    cleaned = cleaned.substring(7);
+  } else if (cleaned.startsWith('```')) {
+    cleaned = cleaned.substring(3);
   }
-  return new GoogleGenAI({ apiKey });
+  if (cleaned.endsWith('```')) {
+    cleaned = cleaned.substring(0, cleaned.length - 3);
+  }
+  cleaned = cleaned.trim();
+  return JSON.parse(cleaned);
+};
+
+// Direct AI Model runner (supports OpenRouter primarily, then falls back to Gemini)
+const callAIModel = async (prompt: string): Promise<string> => {
+  // Use OpenRouter if key is defined in local/build environment variables
+  const openrouterKey = import.meta.env.VITE_OPENROUTER_API_KEY;
+  const openrouterModel = import.meta.env.VITE_OPENROUTER_MODEL || 'google/gemma-2-9b-it:free';
+
+  if (openrouterKey) {
+    const url = 'https://openrouter.ai/api/v1/chat/completions';
+    const requestHeaders: Record<string, string> = {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${openrouterKey}`,
+      'HTTP-Referer': window.location.origin,
+      'X-Title': 'The One AI Path Builder'
+    };
+
+    const promptFormattingInstructions = `
+IMPORTANT constraint: You must ONLY output a valid JSON and absolutely nothing else. Do NOT include markdown styling or outer wrapper conversational texts.
+Return exclusively a single valid JSON object representing the course roadmap matching exactly this schema:
+{
+  "title": "A catchy title for the learning path",
+  "description": "An overview explaining why this path works for their goal",
+  "estimatedTime": "e.g., 3-6 months",
+  "steps": [
+    {
+      "title": "Step title",
+      "description": "Detailed explanation of why this step is critical and what they will learn",
+      "resourceId": "ID if matched from the available catalog, otherwise null",
+      "resourceType": "course" | "roadmap" | "external"
+    }
+  ]
+}
+`;
+
+    const body = {
+      model: openrouterModel,
+      messages: [
+        {
+          role: 'system',
+          content: `You are an expert academic advisor for "The One" learning platform. You output raw, pristine JSON that fits the requested schema exactly. Never include preamble, summary or chat explanation outside the JSON format.`
+        },
+        {
+          role: 'user',
+          content: prompt + "\n\n" + promptFormattingInstructions
+        }
+      ],
+      temperature: 0.1,
+      response_format: { type: 'json_object' }
+    };
+
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: requestHeaders,
+      body: JSON.stringify(body)
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`AI model query failed (${response.status}): ${errorText || response.statusText}`);
+    }
+
+    const data = await response.json();
+    if (!data.choices || data.choices.length === 0 || !data.choices[0].message?.content) {
+      throw new Error('AI provider returned an empty completion result.');
+    }
+
+    return data.choices[0].message.content;
+  }
+
+  // Fallback to Gemini if Gemini API key exists
+  const geminiKey = import.meta.env.VITE_GEMINI_API_KEY || (typeof process !== 'undefined' ? process.env.GEMINI_API_KEY : '');
+  if (!geminiKey) {
+    throw new Error('No API key configured. Please configure VITE_OPENROUTER_API_KEY or GEMINI_API_KEY in your env settings.');
+  }
+
+  const ai = new GoogleGenAI({ apiKey: geminiKey });
+  const response = await ai.models.generateContent({
+    model: "gemini-3-flash-preview",
+    contents: prompt,
+    config: {
+      responseMimeType: "application/json",
+      responseSchema: {
+        type: Type.OBJECT,
+        properties: {
+          title: { type: Type.STRING },
+          description: { type: Type.STRING },
+          estimatedTime: { type: Type.STRING },
+          steps: {
+            type: Type.ARRAY,
+            items: {
+              type: Type.OBJECT,
+              properties: {
+                title: { type: Type.STRING },
+                description: { type: Type.STRING },
+                resourceId: { type: Type.STRING },
+                resourceType: { type: Type.STRING, enum: ['course', 'roadmap', 'external'] }
+              },
+              required: ['title', 'description', 'resourceType']
+            }
+          }
+        },
+        required: ['title', 'description', 'estimatedTime', 'steps']
+      }
+    }
+  });
+
+  if (!response.text) {
+    throw new Error('Empty response received from Gemini.');
+  }
+  return response.text;
 };
 
 interface GeneratedPath {
@@ -43,7 +167,7 @@ export default function AIGenerator() {
     setResult(null);
 
     try {
-      // Prepare context for Gemini
+      // Prepare context for the AI
       const courseContext = courses.map(c => ({
         id: c.id,
         title: c.title,
@@ -84,41 +208,20 @@ export default function AIGenerator() {
         }
       `;
 
-      const response = await getAI().models.generateContent({
-        model: "gemini-3-flash-preview",
-        contents: prompt,
-        config: {
-          responseMimeType: "application/json",
-          responseSchema: {
-            type: Type.OBJECT,
-            properties: {
-              title: { type: Type.STRING },
-              description: { type: Type.STRING },
-              estimatedTime: { type: Type.STRING },
-              steps: {
-                type: Type.ARRAY,
-                items: {
-                  type: Type.OBJECT,
-                  properties: {
-                    title: { type: Type.STRING },
-                    description: { type: Type.STRING },
-                    resourceId: { type: Type.STRING },
-                    resourceType: { type: Type.STRING, enum: ['course', 'roadmap', 'external'] }
-                  },
-                  required: ['title', 'description', 'resourceType']
-                }
-              }
-            },
-            required: ['title', 'description', 'estimatedTime', 'steps']
-          }
-        }
-      });
+      const responseText = await callAIModel(prompt);
+      const data = parseJSONString(responseText);
+      
+      if (!data || typeof data !== 'object') {
+        throw new Error('AI response is not a valid JSON object.');
+      }
+      if (!data.title || !data.steps || !Array.isArray(data.steps)) {
+        throw new Error('AI response structure is incomplete (missing title or steps).');
+      }
 
-      const data = JSON.parse(response.text);
       setResult(data);
-    } catch (err) {
+    } catch (err: any) {
       console.error('AI Generation Error:', err);
-      setError('Failed to generate path. Please try again.');
+      setError(err?.message || 'Failed to generate path. Please verify that your API key settings are configured correctly.');
     } finally {
       setLoading(false);
     }
