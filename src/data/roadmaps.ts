@@ -9,9 +9,9 @@ export const roadmaps: Roadmap[] = [
     prerequisites: 'None',
     method: 'Watch ≤40% of the time, do ≥60% (problem sets and projects).',
     weeklyPlan: [
-      { week: 1, task: 'Start CS50 or MIT 6.0001' },
-      { week: 4, task: 'Begin Berkeley CS61A style practice (recursion + abstraction)' },
-      { week: 7, task: 'Implement algorithms from Princeton/MIT' },
+      { week: 1, task: 'Start CS50 or MIT 6.0001', courseIds: ['harvard-cs50', 'mit-6-0001'] },
+      { week: 4, task: 'Begin Berkeley CS61A style practice (recursion + abstraction)', courseIds: ['berkeley-cs61a'] },
+      { week: 7, task: 'Implement algorithms from Princeton/MIT', courseIds: ['princeton-algorithms'] },
       { week: 10, task: 'Complete Capstone Project' }
     ],
     options: [
@@ -44,9 +44,9 @@ export const roadmaps: Roadmap[] = [
     prerequisites: 'High school algebra',
     method: 'Derive → Implement tiny example → Explain in words.',
     weeklyPlan: [
-      { week: 1, task: 'MIT 18.06 Linear Algebra (Lectures 1-10)' },
-      { week: 3, task: 'MIT 18.06 (Lectures 11-20) + Probability basics' },
-      { week: 5, task: 'MIT 18.06 (Lectures 21-35) + Multivariate Calculus' },
+      { week: 1, task: 'MIT 18.06 Linear Algebra (Lectures 1-10)', courseIds: ['mit-18-06', '3b1b-linear-algebra'] },
+      { week: 3, task: 'MIT 18.06 (Lectures 11-20) + Probability basics', courseIds: ['mit-18-06', 'harvard-stat110', '3b1b-probability'] },
+      { week: 5, task: 'MIT 18.06 (Lectures 21-35) + Multivariate Calculus', courseIds: ['mit-18-06', '3b1b-calculus'] },
       { week: 8, task: 'Capstone: From-scratch PCA' }
     ],
     options: [
@@ -79,9 +79,9 @@ export const roadmaps: Roadmap[] = [
     prerequisites: 'Math for ML roadmap or equivalent knowledge',
     method: 'Implement from scratch before using libraries.',
     weeklyPlan: [
-      { week: 1, task: 'Stanford CS229 (Supervised Learning)' },
-      { week: 4, task: 'Stanford CS229 (Unsupervised Learning + Theory)' },
-      { week: 7, task: 'Data Science practice (Berkeley/HarvardX materials)' },
+      { week: 1, task: 'Stanford CS229 (Supervised Learning)', courseIds: ['stanford-cs229', 'cornell-cs4780'] },
+      { week: 4, task: 'Stanford CS229 (Unsupervised Learning + Theory)', courseIds: ['stanford-cs229'] },
+      { week: 7, task: 'Data Science practice (Berkeley/HarvardX materials)', courseIds: ['berkeley-data100', 'harvard-cs109'] },
       { week: 10, task: 'Capstone: Model Debugging Report' }
     ],
     options: [
@@ -114,9 +114,9 @@ export const roadmaps: Roadmap[] = [
     prerequisites: 'ML Core roadmap or equivalent',
     method: 'Build and train small models to understand architecture.',
     weeklyPlan: [
-      { week: 1, task: 'Neural Network basics (Backprop, Optimizers)' },
-      { week: 4, task: 'Convolutional Neural Networks (Stanford CS231n)' },
-      { week: 7, task: 'Recurrent Networks and Transformers' },
+      { week: 1, task: 'Neural Network basics (Backprop, Optimizers)', courseIds: ['3b1b-neural-networks', 'mit-6-s191', 'berkeley-cs182'] },
+      { week: 4, task: 'Convolutional Neural Networks (Stanford CS231n)', courseIds: ['stanford-cs231n', 'michigan-eecs498'] },
+      { week: 7, task: 'Recurrent Networks and Transformers', courseIds: ['statquest-deep-learning'] },
       { week: 10, task: 'Capstone: Reproducible Training Pipeline' }
     ],
     options: [
@@ -149,9 +149,9 @@ export const roadmaps: Roadmap[] = [
     prerequisites: 'Deep Learning roadmap or equivalent',
     method: 'Focus on both classic NLP and modern LLM techniques.',
     weeklyPlan: [
-      { week: 1, task: 'Text processing and Word Embeddings' },
-      { week: 4, task: 'Sequence models (RNNs, LSTMs)' },
-      { week: 7, task: 'Attention and Transformers' },
+      { week: 1, task: 'Text processing and Word Embeddings', courseIds: ['columbia-nlp'] },
+      { week: 4, task: 'Sequence models (RNNs, LSTMs)', courseIds: ['columbia-nlp', 'stanford-cs224n'] },
+      { week: 7, task: 'Attention and Transformers', courseIds: ['stanford-cs224n', 'stanford-cs25', 'oxford-nlp'] },
       { week: 10, task: 'Capstone: Text Classifier + Interpretation' }
     ],
     options: [
@@ -184,9 +184,9 @@ export const roadmaps: Roadmap[] = [
     prerequisites: 'Deep Learning roadmap or equivalent',
     method: 'Combine classic CV techniques with modern DL approaches.',
     weeklyPlan: [
-      { week: 1, task: 'Image processing basics' },
-      { week: 4, task: 'CNNs and Object Detection (Stanford CS231n)' },
-      { week: 7, task: 'Segmentation and Generative Models' },
+      { week: 1, task: 'Image processing basics', courseIds: ['uw-cse455'] },
+      { week: 4, task: 'CNNs and Object Detection (Stanford CS231n)', courseIds: ['stanford-cs231n', 'michigan-eecs498'] },
+      { week: 7, task: 'Segmentation and Generative Models', courseIds: ['mit-6-819', 'brown-csci1470'] },
       { week: 10, task: 'Capstone: Object Recognition Mini-System' }
     ],
     options: [
@@ -219,9 +219,9 @@ export const roadmaps: Roadmap[] = [
     prerequisites: 'Basic Python knowledge',
     method: 'Focus on EDA, storytelling, and interactive visualization.',
     weeklyPlan: [
-      { week: 1, task: 'Master Pandas and Data Cleaning (Harvard CS109 style)' },
-      { week: 4, task: 'Exploratory Data Analysis and Statistics (Berkeley Data 100)' },
-      { week: 7, task: 'Interactive Visualization and Dashboards (Streamlit/Dash)' },
+      { week: 1, task: 'Master Pandas and Data Cleaning (Harvard CS109 style)', courseIds: ['harvard-cs109'] },
+      { week: 4, task: 'Exploratory Data Analysis and Statistics (Berkeley Data 100)', courseIds: ['berkeley-data100', 'statquest-stats-fundamentals'] },
+      { week: 7, task: 'Interactive Visualization and Dashboards (Streamlit/Dash)', courseIds: ['berkeley-data100', 'harvard-cs109'] },
       { week: 10, task: 'Capstone: End-to-End Market Analysis Engine' }
     ],
     options: [

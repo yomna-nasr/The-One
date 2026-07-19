@@ -2,7 +2,8 @@ import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { roadmaps } from '../data/roadmaps';
-import { ArrowLeft, CheckCircle2, Calendar, BookOpen, Target } from 'lucide-react';
+import { courses } from '../data/courses';
+import { ArrowLeft, CheckCircle2, Calendar, BookOpen, Target, ArrowUpRight } from 'lucide-react';
 
 export default function RoadmapDetail() {
   const { t } = useTranslation();
@@ -39,15 +40,44 @@ export default function RoadmapDetail() {
           <section className="px-4 sm:px-0">
             <h2 className="micro-label mb-8">{t('roadmaps.weeklyPlan')}</h2>
             <div className="space-y-0 border-l editorial-border ml-2 font-sans">
-              {roadmap.weeklyPlan.map((step) => (
-                <div key={step.week} className="relative pl-10 pb-12 last:pb-0">
-                  <div className="absolute left-[-5px] top-0 w-[9px] h-[9px] rounded-full bg-ink" />
-                  <span className="micro-label opacity-40 mb-2 block">{t('roadmaps.week')} {step.week}</span>
-                  <p className="text-lg font-serif font-bold leading-tight">
-                    {step.task}
-                  </p>
-                </div>
-              ))}
+              {roadmap.weeklyPlan.map((step) => {
+                const linkedCourses = step.courseIds
+                  ? step.courseIds
+                      .map((id) => courses.find((c) => c.id === id))
+                      .filter((c): c is typeof courses[number] => !!c)
+                  : [];
+
+                return (
+                  <div key={step.week} className="relative pl-10 pb-12 last:pb-0">
+                    <div className="absolute left-[-5px] top-0 w-[9px] h-[9px] rounded-full bg-ink" />
+                    <span className="micro-label opacity-40 mb-2 block">{t('roadmaps.week')} {step.week}</span>
+                    <p className="text-lg font-serif font-bold leading-tight mb-2">
+                      {step.task}
+                    </p>
+                    {linkedCourses.length > 0 && (
+                      <div className="mt-3 space-y-1.5">
+                        <span className="text-[9px] uppercase tracking-wider font-bold opacity-50 block font-sans">
+                          {t('roadmaps.suggestedCourses', 'Suggested Resources:')}
+                        </span>
+                        <div className="flex flex-wrap gap-2">
+                          {linkedCourses.map((course) => (
+                            <Link
+                              key={course.id}
+                              to={`/course/${course.id}`}
+                              className="inline-flex items-center gap-1.5 px-2.5 py-1.5 bg-ink/[0.02] hover:bg-ink hover:text-paper border border-ink/10 hover:border-ink text-xs transition-all font-sans cursor-pointer group"
+                            >
+                              <BookOpen className="w-3.5 h-3.5 text-ink/60 group-hover:text-paper" />
+                              <span className="font-semibold">{course.title}</span>
+                              <span className="text-[10px] opacity-60">({course.university})</span>
+                              <ArrowUpRight className="w-3 h-3 ml-0.5 opacity-50 group-hover:opacity-100" />
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           </section>
 

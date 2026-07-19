@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { GoogleGenAI, Type } from "@google/genai";
 import { courses } from '../data/courses';
 import { roadmaps } from '../data/roadmaps';
 import { 
@@ -9,7 +8,8 @@ import {
   Loader2, 
   BrainCircuit, 
   Target, 
-  Clock
+  Clock,
+  Download
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
@@ -29,115 +29,36 @@ const parseJSONString = (text: string) => {
   return JSON.parse(cleaned);
 };
 
-// Direct AI Model runner (supports OpenRouter primarily, then falls back to Gemini)
+// Direct AI Model runner calling our server-side API proxy (secure, hides keys)
 const callAIModel = async (prompt: string): Promise<string> => {
-  // Use OpenRouter if key is defined in local/build environment variables
-  const openrouterKey = import.meta.env.VITE_OPENROUTER_API_KEY;
-  const openrouterModel = import.meta.env.VITE_OPENROUTER_MODEL || 'google/gemma-2-9b-it:free';
-
-  if (openrouterKey) {
-    const url = 'https://openrouter.ai/api/v1/chat/completions';
-    const requestHeaders: Record<string, string> = {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${openrouterKey}`,
-      'HTTP-Referer': window.location.origin,
-      'X-Title': 'The One AI Path Builder'
-    };
-
-    const promptFormattingInstructions = `
-IMPORTANT constraint: You must ONLY output a valid JSON and absolutely nothing else. Do NOT include markdown styling or outer wrapper conversational texts.
-Return exclusively a single valid JSON object representing the course roadmap matching exactly this schema:
-{
-  "title": "A catchy title for the learning path",
-  "description": "An overview explaining why this path works for their goal",
-  "estimatedTime": "e.g., 3-6 months",
-  "steps": [
-    {
-      "title": "Step title",
-      "description": "Detailed explanation of why this step is critical and what they will learn",
-      "resourceId": "ID if matched from the available catalog, otherwise null",
-      "resourceType": "course" | "roadmap" | "external"
-    }
-  ]
-}
-`;
-
-    const body = {
-      model: openrouterModel,
-      messages: [
-        {
-          role: 'system',
-          content: `You are an expert academic advisor for "The One" learning platform. You output raw, pristine JSON that fits the requested schema exactly. Never include preamble, summary or chat explanation outside the JSON format.`
-        },
-        {
-          role: 'user',
-          content: prompt + "\n\n" + promptFormattingInstructions
-        }
-      ],
-      temperature: 0.1,
-      response_format: { type: 'json_object' }
-    };
-
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: requestHeaders,
-      body: JSON.stringify(body)
-    });
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(`AI model query failed (${response.status}): ${errorText || response.statusText}`);
-    }
-
-    const data = await response.json();
-    if (!data.choices || data.choices.length === 0 || !data.choices[0].message?.content) {
-      throw new Error('AI provider returned an empty completion result.');
-    }
-
-    return data.choices[0].message.content;
-  }
-
-  // Fallback to Gemini if Gemini API key exists
-  const geminiKey = import.meta.env.VITE_GEMINI_API_KEY || (typeof process !== 'undefined' ? process.env.GEMINI_API_KEY : '');
-  if (!geminiKey) {
-    throw new Error('No API key configured. Please configure VITE_OPENROUTER_API_KEY or GEMINI_API_KEY in your env settings.');
-  }
-
-  const ai = new GoogleGenAI({ apiKey: geminiKey });
-  const response = await ai.models.generateContent({
-    model: "gemini-3-flash-preview",
-    contents: prompt,
-    config: {
-      responseMimeType: "application/json",
-      responseSchema: {
-        type: Type.OBJECT,
-        properties: {
-          title: { type: Type.STRING },
-          description: { type: Type.STRING },
-          estimatedTime: { type: Type.STRING },
-          steps: {
-            type: Type.ARRAY,
-            items: {
-              type: Type.OBJECT,
-              properties: {
-                title: { type: Type.STRING },
-                description: { type: Type.STRING },
-                resourceId: { type: Type.STRING },
-                resourceType: { type: Type.STRING, enum: ['course', 'roadmap', 'external'] }
-              },
-              required: ['title', 'description', 'resourceType']
-            }
-          }
-        },
-        required: ['title', 'description', 'estimatedTime', 'steps']
-      }
-    }
+  const response = await fetch('/api/generate-path', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ prompt })
   });
 
-  if (!response.text) {
-    throw new Error('Empty response received from Gemini.');
+  if (!response.ok) {
+    const errorText = await response.text();
+    let errorMessage = 'Failed to generate learning path from AI.';
+    try {
+      const errorJson = JSON.parse(errorText);
+      if (errorJson.error) {
+        errorMessage = errorJson.error;
+      }
+    } catch (e) {
+      // Fallback
+    }
+    throw new Error(errorMessage);
   }
-  return response.text;
+
+  const data = await response.json();
+  if (!data.text) {
+    throw new Error('AI provider returned an empty completion result.');
+  }
+
+  return data.text;
 };
 
 interface GeneratedPath {
@@ -158,6 +79,42 @@ export default function AIGenerator() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<GeneratedPath | null>(null);
   const [error, setError] = useState<string | null>(null);
+
+  const downloadMarkdown = () => {
+    if (!result) return;
+
+    let mdContent = `# ${result.title}\n\n`;
+    mdContent += `> ${result.description}\n\n`;
+    mdContent += `- **Estimated Time:** ${result.estimatedTime}\n`;
+    mdContent += `- **Total Milestones:** ${result.steps.length} Milestones\n\n`;
+    mdContent += `## Learning Milestones\n\n`;
+
+    result.steps.forEach((step, index) => {
+      mdContent += `### ${index + 1}. ${step.title}\n`;
+      mdContent += `**Type:** \`${step.resourceType.toUpperCase()}\`\n\n`;
+      mdContent += `${step.description}\n\n`;
+      if (step.resourceId) {
+        const resourceLink = step.resourceType === 'course' 
+          ? `${window.location.origin}/course/${step.resourceId}`
+          : `${window.location.origin}/roadmap/${step.resourceId}`;
+        mdContent += `* [View Resource on The One](${resourceLink})\n\n`;
+      }
+      mdContent += `---\n\n`;
+    });
+
+    mdContent += `*Generated by "The One" AI Path Builder on ${new Date().toLocaleDateString()}*\n`;
+
+    const blob = new Blob([mdContent], { type: 'text/markdown;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    const safeTitle = result.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+    link.setAttribute('download', `${safeTitle || 'learning-path'}.md`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
 
   const generatePath = async () => {
     if (!goal.trim()) return;
@@ -299,15 +256,24 @@ export default function AIGenerator() {
             <div className="border-l-4 border-ink pl-8 space-y-4">
               <h3 className="text-3xl font-serif font-bold">{result.title}</h3>
               <p className="text-ink/60 font-serif leading-relaxed">{result.description}</p>
-            <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 text-[10px] uppercase tracking-widest font-bold opacity-60">
-                <span className="flex items-center gap-2">
-                  <Clock className="w-3 h-3" />
-                  {result.estimatedTime}
-                </span>
-                <span className="flex items-center gap-2">
-                  <Target className="w-3 h-3" />
-                  {result.steps.length} Milestones
-                </span>
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b editorial-border pb-6">
+                <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-[10px] uppercase tracking-widest font-bold opacity-60">
+                  <span className="flex items-center gap-2">
+                    <Clock className="w-3 h-3" />
+                    {result.estimatedTime}
+                  </span>
+                  <span className="flex items-center gap-2">
+                    <Target className="w-3 h-3" />
+                    {result.steps.length} Milestones
+                  </span>
+                </div>
+                <button
+                  onClick={downloadMarkdown}
+                  className="inline-flex items-center gap-2 px-4 py-2 border editorial-border hover:bg-ink hover:text-paper text-[10px] uppercase tracking-widest font-bold transition-all cursor-pointer bg-transparent"
+                >
+                  <Download className="w-3.5 h-3.5" />
+                  Download Plan (.md)
+                </button>
               </div>
             </div>
 
@@ -347,10 +313,17 @@ export default function AIGenerator() {
               ))}
             </div>
 
-            <div className="pt-12 border-t editorial-border text-center">
+            <div className="pt-12 border-t editorial-border text-center space-y-4">
               <p className="text-xs text-ink/40 italic">
-                Satisfied with this path? You can bookmark this page or copy the plan.
+                Satisfied with this path? Save the generated plan to your device as a Markdown document.
               </p>
+              <button
+                onClick={downloadMarkdown}
+                className="inline-flex items-center gap-2 px-6 py-3 bg-ink text-paper text-xs uppercase tracking-widest font-bold hover:bg-ink/90 transition-colors cursor-pointer"
+              >
+                <Download className="w-4 h-4" />
+                Download Learning Path (.md)
+              </button>
             </div>
           </motion.div>
         )}

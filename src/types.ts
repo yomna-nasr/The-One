@@ -56,6 +56,7 @@ export interface Course {
   level: Level;
   format: Format;
   certificate: CertificateStatus;
+  duration?: string;
   whyItsGreat: string;
   forWhom: string;
   links: {
@@ -75,7 +76,7 @@ export interface Roadmap {
   forWhom: string;
   prerequisites: string;
   method: string;
-  weeklyPlan: { week: number; task: string }[];
+  weeklyPlan: { week: number; task: string; courseIds?: string[] }[];
   options: string[];
   capstoneProject: Project;
 }

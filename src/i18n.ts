@@ -112,7 +112,9 @@ const resources = {
         level: 'Level',
         format: 'Format',
         certificate: 'Certificate',
-        prerequisites: 'Prerequisites'
+        prerequisites: 'Prerequisites',
+        duration: 'Duration',
+        source: 'Source'
       }
     }
   },
@@ -225,7 +227,9 @@ const resources = {
         level: 'Niveau',
         format: 'Format',
         certificate: 'Zertifikat',
-        prerequisites: 'Voraussetzungen'
+        prerequisites: 'Voraussetzungen',
+        duration: 'Dauer',
+        source: 'Institution'
       }
     }
   },
@@ -338,7 +342,9 @@ const resources = {
         level: 'Niveau',
         format: 'Format',
         certificate: 'Certificat',
-        prerequisites: 'Prérequis'
+        prerequisites: 'Prérequis',
+        duration: 'Durée',
+        source: 'Source'
       }
     }
   },
@@ -451,7 +457,9 @@ const resources = {
         level: 'المستوى',
         format: 'الصيغة',
         certificate: 'الشهادة',
-        prerequisites: 'المتطلبات المسبقة'
+        prerequisites: 'المتطلبات المسبقة',
+        duration: 'المدة',
+        source: 'المصدر'
       }
     }
   },
@@ -564,7 +572,9 @@ const resources = {
         level: 'Nivel',
         format: 'Formato',
         certificate: 'Certificado',
-        prerequisites: 'Prerrequisitos'
+        prerequisites: 'Prerrequisitos',
+        duration: 'Duración',
+        source: 'Institución'
       }
     }
   },
@@ -677,7 +687,9 @@ const resources = {
         level: 'Livello',
         format: 'Formato',
         certificate: 'Certificato',
-        prerequisites: 'Prerequisiti'
+        prerequisites: 'Prerequisiti',
+        duration: 'Durata',
+        source: 'Istituzione'
       }
     }
   }

@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { courses } from '../data/courses';
 import { ExternalLink, ArrowLeft, CheckCircle2 } from 'lucide-react';
+import { getCourseDuration } from '../lib/utils';
 
 export default function CourseDetail() {
   const { t } = useTranslation();
@@ -47,6 +48,16 @@ export default function CourseDetail() {
           <div className="flex flex-col">
             <span className="micro-label opacity-40 mb-1">{t('common.certificate')}</span>
             <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest">{course.certificate}</span>
+          </div>
+          <div className="w-px bg-line h-8 hidden sm:block" />
+          <div className="flex flex-col">
+            <span className="micro-label opacity-40 mb-1">{t('common.duration')}</span>
+            <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest">{getCourseDuration(course)}</span>
+          </div>
+          <div className="w-px bg-line h-8 hidden sm:block" />
+          <div className="flex flex-col">
+            <span className="micro-label opacity-40 mb-1">{t('common.source')}</span>
+            <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest">{course.university}</span>
           </div>
         </div>
       </header>

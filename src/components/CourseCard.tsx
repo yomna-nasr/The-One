@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Course } from '../types';
 import { ExternalLink, ArrowRight } from 'lucide-react';
+import { getCourseDuration } from '../lib/utils';
 
 export const CourseCard: React.FC<{ course: Course }> = ({ course }) => {
   const { t } = useTranslation();
@@ -35,6 +36,12 @@ export const CourseCard: React.FC<{ course: Course }> = ({ course }) => {
             </span>
             <span className="px-2 py-1 bg-ink/5 text-[10px] uppercase tracking-wider font-semibold">
               {t('common.certificate')}: {course.certificate}
+            </span>
+            <span className="px-2 py-1 bg-ink/5 text-[10px] uppercase tracking-wider font-semibold text-ink/80">
+              {t('common.duration')}: {getCourseDuration(course)}
+            </span>
+            <span className="px-2 py-1 bg-ink/5 text-[10px] uppercase tracking-wider font-semibold text-ink/80">
+              {t('common.source')}: {course.university}
             </span>
           </div>
         </div>
